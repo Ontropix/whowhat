@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="WhoWhat.UI.WindowsPhone.Views.UserProfile.UserProfileActivityView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:templateSelectors="clr-namespace:WhoWhat.UI.WindowsPhone.Infrastructure.TemplateSelectors"
+             xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+             mc:Ignorable="d"
+    d:DesignHeight="100" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="RatingChanged">
+            <Grid Margin="6"  micro:Message.Attach="[Event Tap] = [Open($dataContext)]" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{Binding QuestionThumbnailUri}" Grid.Column="0" Width="90"  Height="90"
+                               HorizontalAlignment="Left"/>
+
+                <!-- Rating shift-->
+                <TextBlock Grid.Column="1" Text="{Binding RatingShift}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Foreground="{Binding Converter={StaticResource NotificationToColorConverter}}"/>
+
+                <TextBlock TextWrapping="Wrap" Text="{Binding QuestionBody}" Grid.Column="2"
+                           Foreground="Black"/>
+
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AnswerMarkedAsAccepted"    >
+            <Grid Margin="6" micro:Message.Attach="[Event Tap] = [Open($dataContext)]">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+
+                <Image Source="{Binding QuestionThumbnailUri}" Grid.Column="0" Width="90" Height="90"
+                               HorizontalAlignment="Left"/>
+
+                <Image  Grid.Column="1" Source="/Assets/accepted.png"/>
+
+                <!-- Rating shift-->
+                <TextBlock Grid.Column="1" Text="{Binding RatingShift}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Foreground="{Binding Converter={StaticResource NotificationToColorConverter}}"/>
+
+                <TextBlock Grid.Column="2" Foreground="Black"
+                           TextWrapping="Wrap" Text="{Binding QuestionBody}"  />
+
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="QuestionAnswered"  >
+            <Grid Margin="6"  micro:Message.Attach="[Event Tap] = [Open($dataContext)]"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Image Source="{Binding QuestionThumbnailUri}" Grid.Column="0" Width="90" Height="90"
+                               HorizontalAlignment="Left"/>
+                
+                <Image  Grid.Column="1" Source="/Assets/new.png"/>
+
+                <TextBlock Grid.Column="2" Foreground="Black"
+                           TextWrapping="Wrap" Text="{Binding QuestionBody}"  />
+
+            </Grid>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <telerikPrimitives:RadDataBoundListBox
+        ItemsSource="{Binding Notifications}">
+
+        <telerikPrimitives:RadDataBoundListBox.EmptyContent>
+            <Grid>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                    Text="No activity yet. Start asking or answering questions!" FontSize="24"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            </Grid>
+        </telerikPrimitives:RadDataBoundListBox.EmptyContent>
+
+
+        <telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+
+            <DataTemplate>
+
+                <Border Background="White" BorderThickness="1"  Margin="{StaticResource WW.Margin.Devider}"
+                        BorderBrush="{StaticResource WW.Brush.Border}">
+
+                    <templateSelectors:NotificationTemplateSelector HorizontalContentAlignment="Stretch"
+                        Content="{Binding}" 
+                        RatingChanged="{StaticResource RatingChanged}"
+                        AnswerMarkedAsAccepted="{StaticResource AnswerMarkedAsAccepted}"
+                        QuestionAnswered="{StaticResource QuestionAnswered}"
+                     />
+
+                </Border>
+
+            </DataTemplate>
+        </telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+    </telerikPrimitives:RadDataBoundListBox>
+</UserControl>

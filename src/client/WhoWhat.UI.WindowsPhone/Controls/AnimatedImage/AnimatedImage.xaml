@@ -1,0 +1,80 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WhoWhat.UI.WindowsPhone.Controls"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../../Resources/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style TargetType="controls:AnimatedImage">
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <ControlTemplate TargetType="controls:AnimatedImage">
+                    <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Margin="{TemplateBinding Margin}" MinWidth="{TemplateBinding MinWidth}"
+                          MinHeight="{TemplateBinding MinHeight}" MaxWidth="{TemplateBinding MaxWidth}" MaxHeight="{TemplateBinding MaxHeight}">
+
+                       <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                
+                                <VisualState x:Name="Loaded">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Image_Loaded">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Indicator">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                
+                                <VisualState x:Name="Failed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Image_Failed">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Indicator">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        
+                        
+                        
+                        <Image  x:Name="Image_Loaded" Visibility="Collapsed" />
+                        <Image  x:Name="Image_Failed" Visibility="Collapsed"/>
+                        <telerikPrimitives:RadBusyIndicator Foreground="{StaticResource WW.Brush.Accent}"
+                            AnimationStyle="AnimationStyle2" IsRunning="True" x:Name="Indicator" Content="" />
+
+                    </Grid>
+                </ControlTemplate>
+
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

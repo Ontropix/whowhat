@@ -1,0 +1,68 @@
+﻿<UserControl
+    x:Class="WhoWhat.UI.WindowsPhone.Views.QuestionListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WhoWhat.UI.WindowsPhone.Controls"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviours="clr-namespace:WhoWhat.UI.WindowsPhone.Infrastructure.Behaviours"
+    mc:Ignorable="d">
+    
+    <Grid>
+
+        <telerikPrimitives:RadBusyIndicator 
+            Style="{StaticResource WW.BusyIndicator}" 
+            Canvas.ZIndex="100"
+            Visibility="{Binding IsInitialLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+            IsRunning="{Binding IsInitialLoading}"
+            Background="Transparent">
+            
+            <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.Loading_Feed}" Foreground="Black" />
+        </telerikPrimitives:RadBusyIndicator>
+
+        <telerikPrimitives:RadDataBoundListBox
+            Visibility="{Binding IsInitialLoading, Converter={StaticResource BoolToVisibilityInvertedConverter}}"
+            DataVirtualizationMode="OnDemandAutomatic"  
+            IsPullToRefreshEnabled="True"
+            EmptyContent="Feed is empty"
+            Foreground="Black"
+            micro:Message.Attach="[Event DataRequested] = [LoadRequestedData()];
+                                  [Event RefreshRequested] = [PullToRefresh()]
+                                 "
+            ItemsSource="{Binding Questions}">
+
+            <telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+                <DataTemplate>
+                    <controls:QuestionSummary Margin="{StaticResource WW.Margin.Devider}" 
+                        micro:Message.Attach="[Event AuthorTapped] = [OpenUserProfile($dataContext)];
+                                              [Event QuestionTapped] = [QuetionDetails($dataContext)];
+                                              [Event TagTapped] = [SearchTag($eventArgs)]"
+                 />
+                </DataTemplate>
+            </telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+                
+            <telerikPrimitives:RadDataBoundListBox.ItemLoadingTemplate>
+                <DataTemplate>
+                    <telerikPrimitives:RadBusyIndicator 
+                        Style="{StaticResource WW.BusyIndicator.ItemLoading}"                            
+                     />
+                </DataTemplate>
+            </telerikPrimitives:RadDataBoundListBox.ItemLoadingTemplate>
+
+            <i:Interaction.Behaviors>
+                <behaviours:RadDataBoundListBoxBehaviour 
+                IsPullToRefreshLoadingCompleted="{Binding IsPullToRefreshLoadingCompleted}"
+                IsVirtualizationEnabled="{Binding IsVirtualizationEnabledProperty}"  />
+            </i:Interaction.Behaviors>
+
+        </telerikPrimitives:RadDataBoundListBox>
+
+    </Grid>
+    
+
+   
+
+</UserControl>

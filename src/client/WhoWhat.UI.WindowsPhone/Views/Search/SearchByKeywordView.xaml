@@ -1,0 +1,110 @@
+﻿<infrastructure:View
+    x:Class="WhoWhat.UI.WindowsPhone.Views.Search.SearchByKeywordView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WhoWhat.UI.WindowsPhone.Controls"
+    xmlns:infrastructure="clr-namespace:WhoWhat.UI.WindowsPhone.Infrastructure"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:bindableAppBar="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <Grid  Background="{StaticResource WW.Brush.Back}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:ViewHeader Text="Search"/>
+
+        <telerikPrimitives:RadBusyIndicator  Grid.Row="1"
+            Style="{StaticResource WW.BusyIndicator}"  Canvas.ZIndex="100"
+                                            Background="Transparent"
+                                            Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+                                            IsRunning="{Binding IsBusy}">
+
+            <TextBlock Text="Search..." Foreground="{StaticResource WW.Brush.Foreground}" />
+        </telerikPrimitives:RadBusyIndicator>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"  />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="12,12,12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="80" />
+                </Grid.ColumnDefinitions>
+
+                <Border BorderBrush="{StaticResource WW.Brush.Border}" 
+                        Height="56" BorderThickness="1">
+                    <Grid>
+
+                        <TextBox Text="{Binding SearchText, Mode=TwoWay}" Name="SearchTextBox" 
+                            FontSize="24"
+                            micro:Message.Attach="[Event KeyDown] = [Search($eventArgs)]"
+                            infrastructure:BindingUtility.UpdateSourceOnChange="True" 
+                            Style="{StaticResource WW.TextBox.Search}"
+                            Padding="0,0,50,0"
+                         />
+                        <Button HorizontalAlignment="Right"
+                              micro:Message.Attach="[Event Tap] = [Clear()]" 
+                              Width="70"
+                              Style="{StaticResource WW.Button.Clear}">
+                            <Image Source="/Assets/AppBar/cancel.png" />
+                        </Button>
+
+                    </Grid>
+
+                </Border>
+
+                <Button Grid.Column="1" 
+                     micro:Message.Attach="[Event Tap] = [Search()]" 
+                     IsEnabled="{Binding IsSearchEnabled}" Style="{StaticResource WW.Button.Action}">
+                    <Image Source="/Assets/AppBar/appbar.search.png" />
+                </Button>
+
+            </Grid>
+
+            <controls:QuestionSummaryList Grid.Row="1" Margin="12,0"  />
+
+            <TextBlock  Grid.Row="1" Text="Nothing found" 
+                        Visibility="{Binding HasResults, Converter={StaticResource BoolToVisibilityInvertedConverter}}"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+        </Grid>
+
+        <bindableAppBar:BindableAppBar IsVisible="{Binding IsBusy, Converter={StaticResource BoolInvertedConverter}}">
+            <bindableAppBar:BindableAppBarButton  
+                 micro:Message.Attach="[Event Click] = [AskQuestion()]"
+                            Text="ask"                            
+                            IconUri="/Assets/AppBar/appbar.question.add.png"/>
+
+            <bindableAppBar:BindableAppBarButton  
+                 micro:Message.Attach="[Event Click] = [Me()]"
+                            Text="me"  
+                            Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisibilityConverter}}"
+                            IconUri="/Assets/AppBar/appbar.people.profile.png"/>
+
+
+            <bindableAppBar:BindableAppBarMenuItem 
+                Text="settings"
+                Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisibilityConverter}}"
+                micro:Message.Attach="[Event Click] = [Settings()]"/>
+
+            <bindableAppBar:BindableAppBarMenuItem 
+                Text="about"
+                  micro:Message.Attach="[Event Click] = [About()]"/>
+
+        </bindableAppBar:BindableAppBar>
+
+    </Grid>
+
+</infrastructure:View>

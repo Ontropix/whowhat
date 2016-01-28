@@ -1,0 +1,20 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Colors -->
+    <Color x:Key="WW.Color.Accent">#00C864</Color>
+    <Color x:Key="WW.Color.Background">#FFFFFF</Color>
+    <Color x:Key="WW.Color.Foreground">#000000</Color>
+    <Color x:Key="WW.Color.Back">#DDDDDD</Color>
+    <Color x:Key="WW.Color.Border">#999999</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="WW.Brush.Foreground" Color="{StaticResource WW.Color.Foreground}" />
+    <SolidColorBrush x:Key="WW.Brush.Background" Color="{StaticResource WW.Color.Background}" />
+    <SolidColorBrush x:Key="WW.Brush.Accent" Color="{StaticResource WW.Color.Accent}" />
+    <SolidColorBrush x:Key="WW.Brush.Back" Color="{StaticResource WW.Color.Back}" />
+    <SolidColorBrush x:Key="WW.Brush.Border" Color="{StaticResource WW.Color.Border}" />
+
+
+</ResourceDictionary>

@@ -1,0 +1,52 @@
+﻿<infrastructure:View x:Class="WhoWhat.UI.WindowsPhone.Views.Question.AnswerQuestionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:infrastructure="clr-namespace:WhoWhat.UI.WindowsPhone.Infrastructure"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:bindableAppBar="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
+    xmlns:controls="clr-namespace:WhoWhat.UI.WindowsPhone.Controls"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <Grid Background="{StaticResource WW.Brush.Back}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" MinHeight="200" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <telerikPrimitives:RadBusyIndicator 
+            Style="{StaticResource WW.BusyIndicator}" Grid.RowSpan="4" Canvas.ZIndex="100"
+                                            Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+                                            IsRunning="{Binding IsBusy}">
+
+            <TextBlock Text="Question Loading..." Foreground="{StaticResource WW.Brush.Foreground}" />
+        </telerikPrimitives:RadBusyIndicator>
+
+        <controls:ViewHeader Text="Your answer" />
+
+        <TextBlock Text="{Binding Question.Body}" Grid.Row="1" Margin="12,12,12,6"
+                   TextWrapping="Wrap" FontSize="24" Foreground="Black"/>
+
+        <TextBox Grid.Row="2" x:Name="TextBoxBody" 
+                             Text="{Binding AnswerBody, Mode=TwoWay}" TextWrapping="Wrap"
+                             MinHeight="150" AcceptsReturn="True"
+                             infrastructure:BindingUtility.UpdateSourceOnChange="True"  />
+
+        <bindableAppBar:BindableAppBar IsVisible="{Binding IsBusy, Converter={StaticResource BoolInvertedConverter}}">
+            <bindableAppBar:BindableAppBarButton             
+                            Text="send" 
+                            micro:Message.Attach="[Event Click] = [Answer()]"
+                            IconUri="/Assets/AppBar/appbar.message.send.png"/>
+        </bindableAppBar:BindableAppBar>
+
+    </Grid>
+</infrastructure:View>

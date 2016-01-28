@@ -1,0 +1,48 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="WhoWhat.UI.WindowsPhone.Views.Login.FacebookLoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviours="clr-namespace:WhoWhat.UI.WindowsPhone.Infrastructure.Behaviours"
+    xmlns:controls="clr-namespace:WhoWhat.UI.WindowsPhone.Controls"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <Grid  Background="{StaticResource WW.Brush.Back}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <controls:ViewHeader Text="Facebook" Grid.Row="0" />
+
+        <telerikPrimitives:RadBusyIndicator 
+            Style="{StaticResource WW.BusyIndicator}" Canvas.ZIndex="100"
+            Grid.Row="1" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+            IsRunning="{Binding IsBusy}">
+
+            <TextBlock Text="Logging in..." Foreground="{StaticResource WW.Brush.Foreground}" />
+        </telerikPrimitives:RadBusyIndicator>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <phone:WebBrowser IsScriptEnabled="True" Source="{Binding LoginUrl}"
+               cal:Message.Attach="[Event Navigated] = [Navigated($eventArgs)]; [Event Navigating] = [Navigating($eventArgs)]"  >
+                <i:Interaction.Behaviors>
+                    <behaviours:CookieBehaviour CookiedCollection="{Binding CookieCollection, Mode=TwoWay}" />
+                </i:Interaction.Behaviors>
+            </phone:WebBrowser>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

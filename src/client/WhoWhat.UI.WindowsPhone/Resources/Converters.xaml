@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+    xmlns:converters="clr-namespace:WhoWhat.UI.WindowsPhone.Infrastructure.Converters">
+
+    <telerik:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <converters:ByteToImageConverter x:Key="ByteToImageConverter" />
+    <converters:DateToSmartStringConverter x:Key="DateToSmartStringConverter" />
+    <converters:AnsweredToForegroundColorConverter x:Key="AnsweredToForegroundColorConverter" />
+    <converters:BoolToVisibilityInvertedConverter x:Key="BoolToVisibilityInvertedConverter" />
+    <converters:BoolInvertedConverter x:Key="BoolInvertedConverter" />
+    <converters:AcceptedToColorConverter x:Key="AcceptedToColorConverter" />
+    <converters:NotificationToColorConverter x:Key="NotificationToColorConverter" />
+
+</ResourceDictionary>

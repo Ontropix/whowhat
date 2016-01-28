@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="WhoWhat.UI.WindowsPhone.Controls.QuestionSummary"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:controls="clr-namespace:WhoWhat.UI.WindowsPhone.Controls"
+    mc:Ignorable="d"  x:Name="Self"
+    d:DesignHeight="150" d:DesignWidth="480">
+
+    <Border Background="White" BorderThickness="1" BorderBrush="{StaticResource WW.Brush.Border}">
+        <Grid Margin="6">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle VerticalAlignment="Top" Fill="{StaticResource WW.Brush.Back}" 
+                   HorizontalAlignment="Left" Width="100" MinHeight="100" Tap="OnQuestonTapped" Grid.Column="0"  />
+
+                <Image Source="{Binding Thumbnail}" VerticalAlignment="Top" 
+                   HorizontalAlignment="Left" Width="100" MinHeight="100" Tap="OnQuestonTapped" Grid.Column="0"  />
+
+                <TextBlock Text="{Binding Body}" Grid.Column="1" 
+                           Foreground="{StaticResource WW.Brush.Foreground}" 
+                           TextWrapping="Wrap"
+                           MinHeight="50" Margin="12,0,12,0" Tap="OnQuestonTapped" />
+
+            </Grid>
+
+            <ListBox Grid.Row="1" ItemsSource="{Binding Tags}" BorderThickness="0" Margin="0,3"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <telerikPrimitives:RadWrapPanel Orientation="Horizontal"  />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Button Style="{StaticResource WW.Button.Tag}" Tap="OnTagTapped" Content="{Binding}" 
+                            HorizontalAlignment="Left" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Votes -->
+                <Border Grid.Column="0" Background="White" Width="40" Height="30" 
+                        BorderThickness="0" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/rating.png"  />
+                        <TextBlock Text="{Binding VotesCount}" 
+                               Foreground="{StaticResource WW.Brush.Foreground}" FontSize="16"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Border>
+
+                <!-- AnswerCount -->
+                <Border Grid.Column="1" 
+                    Width="40" Height="30" HorizontalAlignment="Left" BorderThickness="0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/count.png"  />
+                        <TextBlock Text="{Binding AnswersCount}" FontSize="16"
+                               Foreground="{Binding IsResolved, Converter={StaticResource AnsweredToForegroundColorConverter}}" 
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Created At -->
+                <TextBlock  Grid.Column="2" Foreground="Black" FontSize="16"
+                       HorizontalAlignment="Center" Margin="6,0" VerticalAlignment="Center"
+                        Text="{Binding CreatedAt, Converter={StaticResource DateToSmartStringConverter}}">
+                </TextBlock>
+
+                <HyperlinkButton FontSize="16"
+                  Content="{Binding Author.FullName}" Grid.Column="3" Tap="OnAuthorTapped" 
+                                 Visibility="{Binding ElementName=Self, Path=IsOwnQuestion, Converter={StaticResource BoolToVisibilityInvertedConverter}}"
+                                 />
+
+                <TextBlock FontSize="16"  Grid.Column="3" 
+                           Text="{Binding Author.FullName}" Foreground="Black"
+                           Visibility="{Binding ElementName=Self, Path=IsOwnQuestion, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+
+</UserControl>

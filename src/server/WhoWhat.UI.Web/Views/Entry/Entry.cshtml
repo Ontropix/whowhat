@@ -1,0 +1,379 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Who What | Ask a question and get answers</title>
+    <meta name="description" content="Who What - social mobile application." />
+    <meta name="keywords" content="who what, code9, question, answer" />
+    <meta name="author" content="Code9" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <link href="/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Content/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+    <!-- web-font -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,300,700,800,400,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+    <!-- web-font -->
+    <!-- js -->
+    <script src="/Content/js/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- js -->
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="/Content/js/move-top.js"></script>
+    <script type="text/javascript" src="/Content/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+</head>
+<body>
+    <!-- header -->
+    <div class="head-bg">
+        <div class="header">
+            <!-- container -->
+            <div class="container">
+                <div class="head-logo">
+                    <a href="#">
+                        <img src="/Content/images/logo.png" alt="" />
+                    </a>
+                </div>
+                <!-- banner Slider starts Here -->
+                <script src="/Content/js/responsiveslides.min.js"></script>
+                <script>
+                    $(function () {
+                        // Slideshow 4
+                        $("#slider4").responsiveSlides({
+                            auto: true,
+                            pager: true,
+                            nav: false,
+                            speed: 500,
+                            namespace: "callbacks",
+                            before: function () {
+                                $('.events').append("<li>before event fired.</li>");
+                            },
+                            after: function () {
+                                $('.events').append("<li>after event fired.</li>");
+                            }
+                        });
+
+                    });
+                </script>
+                <!--//End-slider-script -->
+                <div id="top" class="callbacks_container">
+                    <ul class="rslides" id="slider4">
+                        <li>
+                            <div class="head-info">
+                                <span>
+                                    <img src="/Content/images/ask.frame.png" alt="whowhat ask" />
+                                </span>
+                                <div class="head-text">
+                                    <h1>Ask a question and get answers</h1>
+                                    <p>
+                                        Choose a photo or make it, write a question and add related tags. Keep your question brief.
+                                        Use Twitter style. No question can be asked without a photo.
+                                    </p>
+                                    <div class="button">
+                                        <a href="http://www.windowsphone.com/en-us/store/app/who-what/25dd4500-c7f4-4d02-a5f1-ca86cacc442d">DOWNLOAD</a>
+                                    </div>
+                                </div>
+                                <div class="mobile-device">
+                                    <img src="/Content/images/ask.frame.png" alt="whowhat ask" />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="head-info">
+                                <span>
+                                    <img src="/Content/images/feed.frame.png" alt="whowhat feed" />
+                                </span>
+                                <div class="head-text">
+                                    <h1>Browse differend feeds</h1>
+                                    <p>Both anonymous and registered users can view popular, live and unanswered questions and search them.</p>
+                                    <div class="button">
+                                        <a href="http://www.windowsphone.com/en-us/store/app/who-what/25dd4500-c7f4-4d02-a5f1-ca86cacc442d">DOWNLOAD</a>
+                                    </div>
+                                </div>
+                                <div class="mobile-device">
+                                    <img src="/Content/images/feed.frame.png" alt="whowhat feed" />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="head-info">
+                                <span>
+                                    <img src="/Content/images/profile.frame.png" alt="whowhat profile" />
+                                </span>
+                                <div class="head-text">
+                                    <h1>View user profiles</h1>
+                                    <p>You can create and view your own user profile as well as browse through the profiles of other users. </p>
+                                    <div class="button">
+                                        <a href="http://www.windowsphone.com/en-us/store/app/who-what/25dd4500-c7f4-4d02-a5f1-ca86cacc442d">DOWNLOAD</a>
+                                    </div>
+                                </div>
+                                <div class="mobile-device">
+                                    <img src="/Content/images/profile.frame.png" alt="whowhat profile" />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="head-info">
+                                <span>
+                                    <img src="/Content/images/tag.search.frame.png" alt="whowhat search" />
+                                </span>
+                                <div class="head-text">
+                                    <h1>Search for specific tags</h1>
+                                    <p>The application provides the search functionality. Also just tap on a tag to display all questions tagged with it.</p>
+                                    <div class="button">
+                                        <a href="http://www.windowsphone.com/en-us/store/app/who-what/25dd4500-c7f4-4d02-a5f1-ca86cacc442d">DOWNLOAD</a>
+                                    </div>
+                                </div>
+                                <div class="mobile-device">
+                                    <img src="/Content/images/tag.search.frame.png" alt="whowhat search" />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <!-- banner Slider Ends Here -->
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- //container -->
+        </div>
+    </div>
+    <!-- header -->
+    <!-- welcome-note -->
+    <div class="welcome-note">
+        <h2>Welcome To Who What</h2>
+        <p>
+            Ask question and get answers!
+            Choose a photo or make it, write a question and add related tags.
+            Vote for noteworthy questions and answers.
+            Your rating is increasing as other users vote for your questions or answers.
+        </p>
+    </div>
+    <!-- welcome-note -->
+    <!-- app -->
+    <div class="app">
+        <!-- container -->
+        <div class="container">
+            <div class="col-md-6 app-left">
+                <h3>Get The App</h3>
+                <p>Available at Windows Phote Store. Android and iOS versions are coming soon.</p>
+                <div class="button">
+                    <a href="http://www.windowsphone.com/en-us/store/app/who-what/25dd4500-c7f4-4d02-a5f1-ca86cacc442d">DOWNLOAD</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <iframe width="560" height="315" src="//www.youtube.com/embed/ZwN-VGNPBng" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //app -->
+    <!-- app-bottom -->
+    <div class="app-bottom">
+        <!-- container -->
+        <div class="container">
+            <div class="bottom-grids">
+                <div class="col-md-3 bottom-grid">
+                    <img src="/Content/images/rocket.png" alt="speed" />
+                    <div class="border"></div>
+                    <h4>Speed</h4>
+                    <p>It's fast, really fast</p>
+                </div>
+                <div class="col-md-3 bottom-grid">
+                    <img src="/Content/images/user.png" alt="concept" />
+                    <div class="border"></div>
+                    <h4>Great concept</h4>
+                    <p>Focused on UX design</p>
+                </div>
+                <div class="col-md-3 bottom-grid">
+                    <img src="/Content/images/setting.png" alt="atchitecture" />
+                    <div class="border"></div>
+                    <h4>Atchitecture</h4>
+                    <p>Designed for high-load</p>
+                </div>
+                <div class="col-md-3 bottom-grid">
+                    <img src="/Content/images/lock.png" alt="login" />
+                    <div class="border"></div>
+                    <h4>Login</h4>
+                    <p>Facebook and VK</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- app-bottom -->
+    <!-- team -->
+    <div class="team">
+        <!-- container -->
+        <div class="container">
+            <script>
+                // You can also use "$(window).load(function() {"
+                $(function () {
+                    // Slideshow 4
+                    $("#slider3").responsiveSlides({
+                        auto: true,
+                        pager: true,
+                        nav: false,
+                        speed: 500,
+                        namespace: "callbacks",
+                        before: function () {
+                            $('.events').append("<li>before event fired.</li>");
+                        },
+                        after: function () {
+                            $('.events').append("<li>after event fired.</li>");
+                        }
+                    });
+
+                });
+            </script>
+            <div id="top" class="callbacks_container">
+                <ul class="rslides" id="slider3">
+                    <li>
+                        <p>Marissa</p>
+                        <div class="u-coma">
+                            <img src="/Content/images/u-coma.png" alt="comma" />
+                        </div>
+                        <p class="subtext">It hepled me to find what I'd been looking for. ;-) Really helpful</p>
+                        <div class="d-coma">
+                            <img src="/Content/images/d-coma.png" alt="comma" />
+                        </div>
+                    </li>
+                    <li>
+                        <p>Richard Dor</p>
+                        <div class="u-coma">
+                            <img src="/Content/images/u-coma.png" alt="comma" />
+                        </div>
+                        <p class="subtext">Happy happy happy because it is 100% working and more!!!</p>
+                        <div class="d-coma">
+                            <img src="/Content/images/d-coma.png" alt="comma" />
+                        </div>
+                    </li>
+                    <li>
+                        <p>Veronica Johnson</p>
+                        <div class="u-coma">
+                            <img src="/Content/images/u-coma.png" alt="comma" />
+                        </div>
+                        <p class="subtext">Rating questions and answers are really addictive</p>
+                        <div class="d-coma">
+                            <img src="/Content/images/d-coma.png" alt="comma" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- //container -->
+    </div>
+    <!-- //team -->
+    <!-- contact -->
+    <div class="contact">
+        <!-- //container -->
+        <div class="container">
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>Got questions? We have the answers. Contact us today.</p>
+                
+                <div class="status alert alert-success" style="display: none"></div>
+                <form id="main-contact-form" name="contact-form" method="post" action="@Url.Action("Contact", "Entry")" role="form">
+                    <div>
+                        <div class="text-field-email">
+                            <input type="text" name="name" placeholder="Name" required="">
+                        </div>
+                        <div class="text-field-name">
+                            <input type="text" name="email" placeholder="Email" required="">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-field-area ">
+                            <textarea name="message" placeholder="Message....." required=""></textarea>
+                            <input type="submit" value="SEND">
+                            <div class="pen-img"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //contact -->
+    <!-- footer -->
+    <div class="footer">
+        <!-- container -->
+        <div class="container wrap">
+            <div class="footer-left">
+                <a href="#">
+                    <img src="/Content/images/flogo.png" alt="" />
+                </a>
+                <p>
+                    Created by <a href="http://code9.biz/">Code9</a>
+                </p>
+            </div>
+            <div class="footer-right">
+                <ul>
+                    <li><a href="https://www.facebook.com/code9.biz" class="facebook"></a></li>
+                    <li><a href="https://twitter.com/code9biz" class="twitter"></a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //footer -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+            $('#main-contact-form').submit(function () {
+                var that = $(this);
+
+                $.post(that.attr('action'), that.serialize(), function (data) {
+                    debugger;
+
+                    that.prev().text(data.Message).fadeIn().delay(3000).fadeOut();
+
+                }, 'json');
+
+                that.trigger('reset');
+
+                return false;
+            });
+
+        });
+    </script>
+    <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+    <!-- content-Get-in-touch -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-52276602-5', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+</body>
+</html>

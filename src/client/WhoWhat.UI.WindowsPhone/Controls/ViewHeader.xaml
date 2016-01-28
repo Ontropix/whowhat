@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="WhoWhat.UI.WindowsPhone.Controls.ViewHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WhoWhat.UI.WindowsPhone.Controls"
+    mc:Ignorable="d"
+    Name="Header"
+    Height="60" d:DesignWidth="480">
+
+    <Grid Background="Transparent" DataContext="{Binding ElementName=Header}">
+
+        <Grid Margin="12,6" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+
+
+            <controls:ImageButton Content="Ask" Grid.Column="0" Tap="HomeTapped" Height="50" 
+                                  ImageNormal="/Assets/Header/logo-inverted.png" Canvas.ZIndex="100" />
+
+
+            <TextBlock Grid.Column="1" Text="{Binding Text}"
+                   TextAlignment="Left" VerticalAlignment="Center"
+                   Foreground="Black" Margin="12,0,0,0"  />
+
+            <StackPanel  Grid.Column="2" Orientation="Horizontal">
+                
+                <controls:ImageButton Content="Ask" Width="60" Tap="AskQuestionTapped"
+                    x:Name="AskQuestionButton" Visibility="Collapsed"
+            		ImageNormal="/Assets/Header/add.png" Margin="0,-10,0,-10" />
+
+
+                <controls:ImageButton  Width="60" Content="" ImageNormal="/Assets/Header/notify.png" Tap="NotificationsTapped"
+                                       x:Name="NotificationButton" Visibility="Collapsed"/>
+
+            </StackPanel>
+
+            <Grid Width="30" Height="30" Grid.Column="2" Margin="90,-15,0,0" x:Name="NotificationsIndicator" Visibility="Collapsed" Tap="NotificationsTapped">
+                <Path Fill="Orange" Width="30" Height="30" Stroke="White">
+                    <Path.Data>
+                        <EllipseGeometry RadiusX="15" RadiusY="15" Center="15,15"  />
+                    </Path.Data>
+                </Path>
+                <TextBlock x:Name="Counter" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" 
+                           FontSize="14"/>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>

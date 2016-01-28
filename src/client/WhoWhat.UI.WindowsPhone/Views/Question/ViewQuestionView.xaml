@@ -1,0 +1,350 @@
+﻿<utilities:View
+    x:Class="WhoWhat.UI.WindowsPhone.Views.Question.ViewQuestionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WhoWhat.UI.WindowsPhone.Controls"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:utilities="clr-namespace:WhoWhat.UI.WindowsPhone.Infrastructure"
+    xmlns:converters="clr-namespace:WhoWhat.UI.WindowsPhone.Infrastructure.Converters"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    Name="Root"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <phone:PhoneApplicationPage.Resources>
+
+        <converters:BoolToImageConverter x:Key="UpVotedConverter" FalseImage="/Assets/up.png" TrueImage="/Assets/up-voted.png" />
+        <converters:BoolToImageConverter x:Key="DownVotedConverter" FalseImage="/Assets/down.png" TrueImage="/Assets/down-voted.png" />
+
+        <DataTemplate x:Key="AnswerTemplate">
+            <controls:Mode IsEdit="{Binding IsEdit}" 
+                               HorizontalContentAlignment="Stretch" 
+                               Margin="{StaticResource WW.Margin.Devider}">
+                <controls:Mode.View>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border  Background="White" BorderThickness="1" 
+                                 BorderBrush="{Binding IsAccepted, Converter={StaticResource AcceptedToColorConverter}}"
+                                 HorizontalAlignment="Stretch" >
+                            <Grid Margin="0,0,0,6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <!-- Up/Down buttons -->
+                                <Grid Grid.Row="0" Width="80" HorizontalAlignment="Left" Margin="0,6,0,0" VerticalAlignment="Top">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="50" />
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+
+                                    <!-- Up -->
+                                    <controls:ImageButton ImageNormal="{Binding IsVotedUp, Converter={StaticResource UpVotedConverter}}"
+                                                      Height="40" Grid.Row="0"
+                                                      IsEnabled="{Binding IsCurrentUserAuthor, Converter={StaticResource BoolInvertedConverter}}"
+                                                      DisabledImage="/Assets/up-disabled.png"
+                                                      micro:Message.Attach="[Event Tap] = [AnswerUp($dataContext)]"
+                                                      VerticalAlignment="Bottom"   />
+
+                                    <TextBlock  Foreground="Black" 
+                                                HorizontalAlignment="Center" Grid.Row="1" 
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Rating}"
+                                                Visibility="{Binding IsVotingBusy, Converter={StaticResource BoolToVisibilityInvertedConverter}}"
+                                     />
+
+
+                                    <telerikPrimitives:RadBusyIndicator  Grid.Row="1" Height="40" Width="40" Content=""
+                                        Style="{StaticResource WW.BusyIndicator}"  
+                                        IsRunning="{Binding IsVotingBusy}"
+                                        Visibility="{Binding IsVotingBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+                                     />
+
+                                    <!-- Down -->
+                                    <controls:ImageButton Grid.Row="2" VerticalAlignment="Top" 
+                                                      Height="40"
+                                                      IsEnabled="{Binding IsCurrentUserAuthor, Converter={StaticResource BoolInvertedConverter}}"
+                                                      DisabledImage="/Assets/down-disabled.png"
+                                                      ImageNormal="{Binding IsVotedDown, Converter={StaticResource DownVotedConverter}}"
+                                                      micro:Message.Attach="[Event Tap] = [AnswerDown($dataContext)]" 
+                                     />
+
+
+                                </Grid>
+
+
+                                <!-- Answer details -->
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="50" />
+                                    </Grid.RowDefinitions>
+
+
+                                    <!-- Body -->
+                                    <TextBlock Grid.Row="0" Text="{Binding Body}" TextWrapping="Wrap" Margin="0,12,12,12" 
+                                         Foreground="{StaticResource WW.Brush.Foreground}"/>
+
+
+
+                                    <!-- Author -->
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+
+                                        <TextBlock  Grid.Column="0" Foreground="Black" FontSize="12" 
+                                          VerticalAlignment="Center" HorizontalAlignment="Center"
+                                          Text="{Binding CreatedAt, Converter={StaticResource DateToSmartStringConverter}}" />
+
+                                        <controls:QuestionAuthor DataContext="{Binding Author}" Grid.Column="1"  HorizontalAlignment="Right"
+                                               micro:Message.Attach="[Event Tap] = [OpenUserProfile($dataContext)]"
+                                             VerticalAlignment="Bottom"/>
+
+                                    </Grid>
+
+
+                                </Grid>
+
+                            </Grid>
+
+                        </Border>
+                        <!-- Action -->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,-1,0,0">
+                            <CheckBox HorizontalAlignment="Center" Margin="0,0,12,0"
+                                                    Visibility="{Binding CanBeAccepted, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                    Content="Accepted" 
+                                                    Style="{StaticResource WW.CheckBox.Accept}"
+                                                    IsChecked="{Binding IsAccepted}"
+                                                    micro:Message.Attach="[Event Checked] = [MarkAsAccepted($dataContext)];
+                                                                          [Event Unchecked] = [UnmarkAsAccepted($dataContext)]"
+                                                />
+
+                            <Button  Content="Edit" FontSize="14" Style="{StaticResource WW.Button.Tag}" 
+                                                    micro:Message.Attach="[Event Tap] = [EditAnswer($dataContext)]"
+                                                    Width="90" 
+                                                    Visibility="{Binding IsCurrentUserAuthor, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                    Tap="OnAnswerEdit" IsEnabled="{Binding CanBeEdited}"
+                                                />
+
+                            <Button  Content="Remove" FontSize="14" Style="{StaticResource WW.Button.Tag}" 
+                                                    Background="Red"
+                                                    micro:Message.Attach="[Event Tap] = [RemoveAnswer($dataContext)]"
+                                                    Width="90" 
+                                                    Visibility="{Binding IsCurrentUserAuthor, Converter={StaticResource BoolToVisibilityConverter}}"
+                                      />
+                        </StackPanel>
+
+                    </Grid>
+
+                </controls:Mode.View>
+                <controls:Mode.Edit>
+                    <Border  Background="White" BorderThickness="1" 
+                             BorderBrush="{StaticResource WW.Brush.Border}"
+                             HorizontalAlignment="Stretch" >
+
+                        <StackPanel  HorizontalAlignment="Stretch" >
+                            <TextBox Text="{Binding EditedBody, Mode=TwoWay}"   Loaded="OnQuestionBodyLoaded" 
+                                     TextWrapping="Wrap"
+                                     MinHeight="150"
+                                     micro:Message.Attach="[Event LostFocus] = [CancelEditAnswer()]"
+                                     LostFocus="AnswerEditedBodyLostFocus"
+                                     utilities:BindingUtility.UpdateSourceOnChange="True" 
+                             />
+                        </StackPanel>
+
+                    </Border>
+                </controls:Mode.Edit>
+            </controls:Mode>
+        </DataTemplate>
+
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid  Background="{StaticResource WW.Brush.Back}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <!-- Transparent panel to prevent touch -->
+        <Grid IsHitTestVisible="False"                                      
+            Grid.RowSpan="2" Canvas.ZIndex="100"
+            Background="Transparent"
+            Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}">       
+        </Grid>
+
+        <controls:ViewHeader Text="{Binding Path=LocalizedResources.Title_Question, Source={StaticResource LocalizedStrings}}" Grid.Row="0"/>
+
+        <ScrollViewer Grid.Row="1"  Visibility="{Binding IsQuestionExist, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid  Margin="12,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <controls:Mode Grid.Row="0" IsEdit="{Binding IsQuestionEdit}" 
+                               HorizontalContentAlignment="Stretch"
+                               VerticalContentAlignment="Stretch">
+                    <controls:Mode.View>
+                        <!-- Question details -->
+                        <Grid  DataContext="{Binding Question}" Margin="0,12" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <!-- Image -->
+                            <controls:AnimatedImage Source="{Binding ImageUri}" Grid.Column="0" VerticalAlignment="Top"
+                               micro:Message.Attach="[Event Tap] = [ViewImage()]"   HorizontalAlignment="Center"
+                               FailedImageSource="/Assets/ApplicationIcon.png" MinHeight="480"/>
+
+                            <!-- Up/Down buttons -->
+                            <StackPanel Grid.Row="0" Width="80" HorizontalAlignment="Left"  Margin="0,20,0,0">
+
+                                <controls:ImageButton 
+                                    ImageNormal="{Binding IsVotedUp, Converter={StaticResource UpVotedConverter}}"
+                                    DisabledImage="/Assets/up-disabled.png"
+                                    IsEnabled="{Binding ElementName=Root, Path=DataContext.IsCurrentUserAuthor, Converter={StaticResource BoolInvertedConverter}}"
+                                    Height="40"
+                                    VerticalAlignment="Bottom"    
+                                    micro:Message.Attach="[Event Tap] = [QuestionUp()]" 
+                                />
+
+                                <Grid  Visibility="{Binding IsVotingBusy, Converter={StaticResource BoolToVisibilityInvertedConverter}}">
+                                    <TextBlock Text="{Binding Rating}" Foreground="{StaticResource WW.Brush.Accent}" 
+                                           Margin="0,12" FontSize="32" Height="50"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+
+                                <telerikPrimitives:RadBusyIndicator Height="50" Width="40" Background="Transparent"
+                                        Style="{StaticResource WW.BusyIndicator}" Content=""
+                                        IsRunning="True" Margin="0,12"
+                                        Visibility="{Binding IsVotingBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+                                />
+
+
+                                <controls:ImageButton 
+                                    VerticalAlignment="Top" 
+                                    Height="40"
+                                    DisabledImage="/Assets/down-disabled.png"
+                                    IsEnabled="{Binding ElementName=Root, Path=DataContext.IsCurrentUserAuthor, Converter={StaticResource BoolInvertedConverter}}"
+                                    ImageNormal="{Binding IsVotedDown, Converter={StaticResource DownVotedConverter}}" 
+                                    micro:Message.Attach="[Event Tap] = [QuestionDown()]" 
+                                 />
+
+                            </StackPanel>
+
+
+                            <!-- Body -->
+                            <TextBlock Text="{Binding Body}" Grid.Row="1" FontSize="24" Margin="12,6"
+                                       TextWrapping="Wrap" Foreground="Black"/>
+
+                            <!-- Tags -->
+                            <ListBox Grid.Row="2" Margin="12,0,0,0" 
+                                     ItemsSource="{Binding Tags}" 
+                                     BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <telerikPrimitives:RadWrapPanel Orientation="Horizontal"  />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource WW.Button.Tag}" micro:Message.Attach="[Event Tap] = [OpenTag($dataContext)]" Content="{Binding}" HorizontalAlignment="Left" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+
+                            <Grid Grid.Row="3" Margin="12,0,0,0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock  Foreground="Black" FontSize="12" Grid.Column="0"
+                                     HorizontalAlignment="Left" Margin="6,0" VerticalAlignment="Center">
+                                    <Run Text="asked " />
+                                    <Run Text="{Binding CreatedAt, Converter={StaticResource DateToSmartStringConverter}}"/>
+                                    <Run Text=" ago"/>
+                                </TextBlock>
+
+                                <controls:QuestionAuthor Grid.Column="1"  DataContext="{Binding Author}" HorizontalAlignment="Right"
+                                                         micro:Message.Attach="[Event Tap] = [OpenUserProfile($dataContext)]" />
+
+                            </Grid>
+                        </Grid>
+                    </controls:Mode.View>
+                    <controls:Mode.Edit >
+
+                        <Border  Background="White" Margin="0,12,0,12"
+                                 BorderThickness="1" 
+                                 BorderBrush="{StaticResource WW.Brush.Border}"
+                                 HorizontalAlignment="Stretch" >
+
+                            <StackPanel>
+
+                                <!-- Body -->
+                                <TextBox Height="150" 
+                                        Text="{Binding Body, Mode=TwoWay}" utilities:BindingUtility.UpdateSourceOnChange="True"
+                                        TextWrapping="Wrap" Loaded="OnQuestionBodyLoaded" Foreground="Black"  />
+
+                                <!-- Tags -->
+                                <TextBlock Text="Tags" Margin="12,12,0,0"  />
+                                <controls:TagsLine Tags="{Binding Tags, Mode=TwoWay}" BorderThickness="1" BorderBrush="Black" Margin="12,6,12,12"/>
+                            </StackPanel>
+
+                        </Border>
+                    </controls:Mode.Edit>
+                </controls:Mode>
+
+                <!-- Answers -->
+                <ListBox Grid.Row="1"  ItemsSource="{Binding Answers}"
+                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                        SelectedItem="{Binding SelectedAnswer}"
+                        Visibility="{Binding IsQuestionEdit, Converter={StaticResource BoolToVisibilityInvertedConverter}}"
+                        ItemTemplate="{StaticResource AnswerTemplate}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+            </Grid>
+        </ScrollViewer>
+
+        <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Foreground="Black" FontSize="24" TextAlignment="Center" 
+                   Visibility="{Binding IsQuestionExist, Converter={StaticResource BoolToVisibilityInvertedConverter}}" >
+            <Run Text="Question is not found." FontWeight="Bold" />
+            <LineBreak />
+            <Run Text="It migth be deleted by the owner." />
+        </TextBlock>
+
+    </Grid>
+
+
+</utilities:View>

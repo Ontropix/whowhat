@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EE1233A0-AC3F-41FE-A935-752A95ADA5A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WhoWhat.Api.Contract</RootNamespace>
+    <AssemblyName>WhoWhat.Api.Contract</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Answer\ChangeAnswerRequest.cs" />
+    <Compile Include="Answer\RemoveAnswerRequest.cs" />
+    <Compile Include="Answer\UnvoteAnswerRequest.cs" />
+    <Compile Include="Answer\VoteAnswerDownRequest.cs" />
+    <Compile Include="Answer\VoteAnswerResponse.cs" />
+    <Compile Include="Answer\VoteAnswerUpRequest.cs" />
+    <Compile Include="Cache\FillCacheRequest.cs" />
+    <Compile Include="Common\BaseRequest.cs" />
+    <Compile Include="Common\BaseResponse.cs" />
+    <Compile Include="Common\PageableRequest.cs" />
+    <Compile Include="Payload\AnswerDto.cs" />
+    <Compile Include="Payload\Author.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question\Requests\ChangeQuestionImageRequest.cs" />
+    <Compile Include="Question\Requests\UnansweredQuestionsRequest.cs" />
+    <Compile Include="Answer\UnacceptAnswerRequest.cs" />
+    <Compile Include="Answer\AcceptAnswerRequest.cs" />
+    <Compile Include="Question\Requests\VoteQuestionDownRequest.cs" />
+    <Compile Include="Question\Responses\ChangeQuestionInfoResponse.cs" />
+    <Compile Include="Question\Responses\QuestionDetailsResponse.cs" />
+    <Compile Include="Question\Requests\CloseQuestionRequest.cs" />
+    <Compile Include="Question\Requests\AnswerQuestionRequest.cs" />
+    <Compile Include="Question\Requests\SearchQuestionByTagRequest.cs" />
+    <Compile Include="Question\Responses\QuestionSummariesResponse.cs" />
+    <Compile Include="Question\Requests\UnvoteQuestionRequest.cs" />
+    <Compile Include="Answer\AnswerStatusResponse.cs" />
+    <Compile Include="Question\Requests\AskQuestionRequest.cs" />
+    <Compile Include="Question\Responses\CloseQuestionResponse.cs" />
+    <Compile Include="Question\Responses\QuestionStatusResponse.cs" />
+    <Compile Include="Question\Responses\AskQuestionResponse.cs" />
+    <Compile Include="Question\Requests\ChangeQuestionInfoRequest.cs" />
+    <Compile Include="Question\Requests\QuestionDetailsRequest.cs" />
+    <Compile Include="Question\Requests\RecentQuestionsRequest.cs" />
+    <Compile Include="Question\Requests\PopularQuestionsRequest.cs" />
+    <Compile Include="Payload\QuestionDto.cs" />
+    <Compile Include="Question\Requests\RemoveQuestionRequest.cs" />
+    <Compile Include="Question\Requests\VoteQuestionUpRequest.cs" />
+    <Compile Include="Question\Requests\SearchQuestionByKeywordRequest.cs" />
+    <Compile Include="Payload\Notification.cs" />
+    <Compile Include="Question\Responses\VoteQuestionResponse.cs" />
+    <Compile Include="User\NotificationsCountRequest.cs" />
+    <Compile Include="User\NotificationsCountResponse.cs" />
+    <Compile Include="User\NotificationsResponse.cs" />
+    <Compile Include="User\NotificationsRequest.cs" />
+    <Compile Include="User\SubscribeToPushupsRequest.cs" />
+    <Compile Include="User\PushupsResponse.cs" />
+    <Compile Include="User\UnsubscribeFromPushupsRequest.cs" />
+    <Compile Include="User\UserProfileResponse.cs" />
+    <Compile Include="User\UserProfileRequest.cs" />
+    <Compile Include="User\UserAnswersRequest.cs" />
+    <Compile Include="User\UserQuestionsRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WhoWhat.Domain\WhoWhat.Domain.csproj">
+      <Project>{BE340D0F-8219-41C5-83C0-2430E42B4807}</Project>
+      <Name>WhoWhat.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WhoWhat.View\WhoWhat.View.csproj">
+      <Project>{31147CEF-ED28-4A70-A08D-42F51E89053B}</Project>
+      <Name>WhoWhat.View</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

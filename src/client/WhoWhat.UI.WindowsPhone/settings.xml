@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<settings>
+  
+   <settng key="ApiUri" value="http://whowhat.azurewebsites.net/api"/> 
+   <settng key="AuthSucceessUri" value="http://whowhat.azurewebsites.net/success#s=1"/> 
+   <settng key="FacebookAuthUri" value="http://whowhat.azurewebsites.net/api/auth/fb"/> 
+   <settng key="VkAuthUri" value="http://whowhat.azurewebsites.net/api/auth/vk"/> 
+    
+</settings>

@@ -1,0 +1,70 @@
+﻿<infrastructure:View
+    x:Class="WhoWhat.UI.WindowsPhone.Views.Search.SearchByTagView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WhoWhat.UI.WindowsPhone.Controls"
+    xmlns:infrastructure="clr-namespace:WhoWhat.UI.WindowsPhone.Infrastructure"
+    xmlns:bindableAppBar="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <Grid  Background="{StaticResource WW.Brush.Back}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:ViewHeader Text="Search" />
+
+        <telerikPrimitives:RadBusyIndicator  Grid.Row="1" Style="{StaticResource WW.BusyIndicator}"  Canvas.ZIndex="100"
+                                            Background="Transparent"
+                                            Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+                                            IsRunning="{Binding IsBusy}">
+
+            <TextBlock Text="Search..." Foreground="{StaticResource WW.Brush.Foreground}" />
+        </telerikPrimitives:RadBusyIndicator>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{Binding Title}" FontSize="32" Grid.Row="0" Foreground="Black" />
+            <controls:QuestionSummaryList Grid.Row="1"/>
+
+        </Grid>
+
+        <bindableAppBar:BindableAppBar>
+            <bindableAppBar:BindableAppBarButton  
+                 micro:Message.Attach="[Event Click] = [AskQuestion()]"
+                            Text="ask"                            
+                            IconUri="/Assets/AppBar/appbar.question.add.png"/>
+
+            <bindableAppBar:BindableAppBarButton  
+                 micro:Message.Attach="[Event Click] = [Me()]"
+                            Text="me"  
+                            Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisibilityConverter}}"
+                            IconUri="/Assets/AppBar/appbar.people.profile.png"/>
+
+
+            <bindableAppBar:BindableAppBarMenuItem 
+                Text="settings"
+                Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisibilityConverter}}"
+                micro:Message.Attach="[Event Click] = [Settings()]"/>
+
+            <bindableAppBar:BindableAppBarMenuItem 
+                Text="about"
+                  micro:Message.Attach="[Event Click] = [About()]"/>
+
+        </bindableAppBar:BindableAppBar>
+
+    </Grid>
+
+</infrastructure:View>
