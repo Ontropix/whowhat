@@ -14,13 +14,13 @@ The initial idea was to create a something similar to Stackoverflow.com, but pic
 - A bunch of custom controls. See /src/client/WhoWhat.UI.WindowsPhone/Controls
 
 # Server 
-- Our own CQRS+Eventsorcing library src/server/dependencies/platform. We're going to make it opensource soon.
+- Our own CQRS+Eventsorcing library /src/server/dependencies/platform. We're going to make it opensource soon.
 - MongoDB event storage
 - ServiceStack. Version 3.9.71, before it became commerical
 - ServiceStack.Api.Swagger for API documentation and visualization
 - StructureMap as IoC container
 - PushSharp for push notification
 
-The server has been hosted in Azure - 2 server instances, 1 MongoDB virtual machine, 1 Redis. 
+The server has been hosted in Azure - 2 server instances, 1 MongoDB virtual machine, 1 Azure Redis Cache. 
 Redis was used as session storage as well as contained current users' score
 
