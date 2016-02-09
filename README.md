@@ -9,14 +9,14 @@ The initial idea was to create a something similar to Stackoverflow.com, but pic
 - Windows Phone 8
 - Telerik Windows Phone Controls
 - Caliburn.Micro
-- RestSharp
+- RestSharp to invoke the Server API
 - Fody (for handy PropertyChanged generation)
-- A bunch of custom controls. See /src/client/WhoWhat.UI.WindowsPhone/Controls
+- A set of custom controls. See /src/client/WhoWhat.UI.WindowsPhone/Controls
 
 ## Server 
-- Our own CQRS+Eventsorcing library /src/server/dependencies/platform. We're going to make it opensource soon.
-- MongoDB event storage
-- ServiceStack. Version 3.9.71, before it became commerical
+- Our own [CQRS](https://en.wikipedia.org/wiki/Command%E2%80%93query_separation#Command_Query_Responsibility_Segregation) + Eventsorcing library /src/server/dependencies/platform. We're going to make it opensource soon.
+- MongoDB as Event storage and Read database
+- ServiceStack for REST API. Version 3.9.71, before it became commerical
 - ServiceStack.Api.Swagger for API documentation and visualization
 - StructureMap as IoC container
 - PushSharp for push notification
