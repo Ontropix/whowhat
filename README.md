@@ -2,10 +2,10 @@
 [![Build Status](https://travis-ci.org/Ontropix/whowhat.svg?branch=master)](https://travis-ci.org/Ontropix/whowhat) <br />
 Question-answer app for Windows Phone
 
-# Description
+## Description
 The initial idea was to create a something similar to Stackoverflow.com, but picture is required. It would be usefull in the situation where you don't know where anything is located or how to name a specific thing. There is a source code for both client and server. 
 
-# Client
+## Client
 - Windows Phone 8
 - Telerik Windows Phone Controls
 - Caliburn.Micro
@@ -13,7 +13,7 @@ The initial idea was to create a something similar to Stackoverflow.com, but pic
 - Fody (for handy PropertyChanged generation)
 - A bunch of custom controls. See /src/client/WhoWhat.UI.WindowsPhone/Controls
 
-# Server 
+## Server 
 - Our own CQRS+Eventsorcing library /src/server/dependencies/platform. We're going to make it opensource soon.
 - MongoDB event storage
 - ServiceStack. Version 3.9.71, before it became commerical
@@ -22,5 +22,5 @@ The initial idea was to create a something similar to Stackoverflow.com, but pic
 - PushSharp for push notification
 
 The server has been hosted in Azure - 2 server instances, 1 MongoDB virtual machine, 1 Azure Redis Cache. 
-Redis was used as session storage as well as contained current users' score
+Redis was used as session storage as well as contained users' score
 

@@ -1,6 +1,5 @@
 Thumbs.db
 *.obj
-*.exe
 *.pdb
 *.user
 *.aps
@@ -38,4 +37,3 @@ packages
 
 #configs need to be here, because setty regenerate them each time when you build solution
 !setty.exe
-!.nuget/NuGet.exe
