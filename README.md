@@ -1,5 +1,5 @@
 # WhoWhat
-[![Build Status](https://travis-ci.org/Ontropix/whowhat.svg?branch=master)](https://travis-ci.org/Ontropix/whowhat)
+[![Build Status](https://travis-ci.org/Ontropix/whowhat.svg?branch=master)](https://travis-ci.org/Ontropix/whowhat) <br />
 Question-answer app for Windows Phone
 
 # Description
