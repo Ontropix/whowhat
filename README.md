@@ -1,4 +1,5 @@
 # WhoWhat
+[![Build Status](https://travis-ci.org/Ontropix/whowhat.svg?branch=master)](https://travis-ci.org/Ontropix/whowhat)
 Question-answer app for Windows Phone
 
 # Description
@@ -20,6 +21,6 @@ The initial idea was to create a something similar to Stackoverflow.com, but pic
 - StructureMap as IoC container
 - PushSharp for push notification
 
-The server has been hosted in Azure - 2 server instance, 1 MongoDB virtual machine, 1 Redis. 
+The server has been hosted in Azure - 2 server instances, 1 MongoDB virtual machine, 1 Redis. 
 Redis was used as session storage as well as contained current users' score
 
